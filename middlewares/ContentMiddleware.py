@@ -11,9 +11,8 @@ class ContentMiddleware():
 
     def __call__(self, environ, start_response):
         req = Request(environ)
-        print(req)
         if not self.__check_content_type(req.content_type):
-            res = Response(status=401)
+            res = Response(u'Non-JSON Content-Type', mimetype= 'text/plain', status=400)
             return res(environ, start_response)
         else:
             return self.app(environ, start_response)

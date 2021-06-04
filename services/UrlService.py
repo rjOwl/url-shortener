@@ -5,7 +5,6 @@ import mongoengine
 
 def get_urls():
     data = ShortenedUrl.objects.to_json()
-    print(data)
     return data
 
 
