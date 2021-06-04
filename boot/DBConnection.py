@@ -2,8 +2,9 @@
 # from pymongo.errors import CollectionInvalid
 # from collections import OrderedDict
 import mongoengine as db
-# from . import shortenedURLSchema as urlSchema
+from dotenv import dotenv_values
 
-connectionString = "mongodb+srv://team7-ninjas:123intake41@goodbookscluster.mrby6.mongodb.net/shortenedURLSDB?retryWrites=true&w=majority"
+config = dotenv_values(".env")
+connectionString = "mongodb+srv://{}:{}@goodbookscluster.mrby6.mongodb.net/{}?retryWrites=true&w=majority".format(config["MONGO_USERNAME"], config["MONGO_PASS"], config["MONGO_DB_NAME"])
 db.connect(host=connectionString)
 

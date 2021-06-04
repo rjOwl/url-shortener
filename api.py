@@ -4,8 +4,8 @@ from controllers.UrlController import *
 import boot.DBConnection
 from middlewares.ContentMiddleware import ContentMiddleware
 
-app = Flask(__name__)
-app.wsgi_app = ContentMiddleware(app.wsgi_app)
+app = Flask("urlShortener")
+# app.wsgi_app = ContentMiddleware(app.wsgi_app)
 
 # Return all shortend links with slug
 @app.route('/shortlinks',methods = ['GET'])
