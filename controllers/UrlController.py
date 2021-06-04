@@ -4,8 +4,6 @@ from flask import jsonify, Response
 
 
 def get_urls(req):
-    # if not check_content_type(req.content_type):
-    #     return Response(status=400)
     data = UrlService.get_urls()
     return data, 200
 
