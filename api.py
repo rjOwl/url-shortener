@@ -2,18 +2,23 @@ from flask import Flask, helpers, redirect, url_for, request, json, jsonify, Res
 from werkzeug.wrappers import response
 from controllers.UrlController import *
 import boot.DBConnection
+from flask_cors import CORS, cross_origin
 from middlewares.ContentMiddleware import ContentMiddleware
 
-app = Flask("urlShortener")
-app.wsgi_app = ContentMiddleware(app.wsgi_app)
+app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+# app.wsgi_app = ContentMiddleware(app.wsgi_app)
 
 # Return all shortend links with slug
 @app.route('/shortlinks',methods = ['GET'])
+@cross_origin()
 def getShortendLinks():
     return get_urls(request)
 
 
 @app.route('/shortlinks', methods = ['POST'])
+@cross_origin()
 def shortenLink():
     return create_short_url(request)
 
