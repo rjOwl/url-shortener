@@ -12,15 +12,6 @@ app.wsgi_app = ContentMiddleware(app.wsgi_app)
 def getShortendLinks():
     return get_urls(request)
 
-    # data = {
-    #     "link": "asd",
-    #     "ASD":123
-    # }
-    # if not check_content_type(request.content_type):
-    #     return "Non-JSON Content-Type", 400
-    # return data, 200
-
-
 
 @app.route('/shortlinks', methods = ['POST'])
 def shortenLink():
@@ -31,12 +22,8 @@ def shortenLink():
 @app.route('/shortlinks/<slug>',methods = ['PUT'])
 def editShortenLinks(slug):
     res = edit_url(request, slug)
-    print(request)
-    # print(slug)
     return res
-    # return jsonify(slug)
 
 if __name__ == '__main__':
    app.run(debug = True)
-
 

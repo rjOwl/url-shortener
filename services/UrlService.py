@@ -16,15 +16,14 @@ def create_short_url(body):
 
     try:
         url = ShortenedUrl(
-            slug=body["slug"],
-            ios={"primary": body["ios"]["primary"], "fallback": body["ios"]["fallback"]}, 
-            android={"primary": body["android"]["primary"],"fallback": body["android"]["fallback"]},
-            web=body["web"]).save()
+        slug=body["slug"],
+        ios={"primary": body["ios"]["primary"], "fallback": body["ios"]["fallback"]}, 
+        android={"primary": body["android"]["primary"],"fallback": body["android"]["fallback"]},
+        web=body["web"]).save()
         return Response(status=200)
     except Exception as e:
-        # if()
-        # print(e)
         return {"error": "failed", "Status": 400}
+
 
 def edit_url_body(body, slug):
     try:
@@ -39,3 +38,4 @@ def edit_url_body(body, slug):
         return Response(status=201)
     except mongoengine.DoesNotExist as e:
         return Response(status=404)
+

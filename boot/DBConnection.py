@@ -1,6 +1,3 @@
-# from pymongo import MongoClient
-# from pymongo.errors import CollectionInvalid
-# from collections import OrderedDict
 import mongoengine as db
 from dotenv import dotenv_values
 
