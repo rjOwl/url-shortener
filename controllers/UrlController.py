@@ -32,7 +32,6 @@ def create_short_url(req):
         else:
             if not data["ios"]["primary"] or not data["ios"]["fallback"]:
                 return Response(status=400)
-
     return UrlService.create_short_url(data)
 
 def edit_url(req, slug):

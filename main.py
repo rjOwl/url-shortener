@@ -8,6 +8,8 @@ from middlewares.ContentMiddleware import ContentMiddleware
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+# middleware
 # app.wsgi_app = ContentMiddleware(app.wsgi_app)
 
 # Return all shortend links with slug
