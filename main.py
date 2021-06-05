@@ -11,17 +11,25 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # middleware
 # app.wsgi_app = ContentMiddleware(app.wsgi_app)
+def __check_content_type(reqContent):
+    if(reqContent and reqContent.startswith('application/json')):
+        return True
+    return False
 
 # Return all shortend links with slug
 @app.route('/shortlinks',methods = ['GET'])
 @cross_origin()
 def getShortendLinks():
+    if not __check_content_type(request.content_type):
+        return Response(status=400)
     return get_urls(request)
 
 
 @app.route('/shortlinks', methods = ['POST'])
 @cross_origin()
 def shortenLink():
+    if not __check_content_type(request.content_type):
+        return Response(status=400)
     return create_short_url(request)
 
 
@@ -29,6 +37,8 @@ def shortenLink():
 @app.route('/shortlinks/<slug>',methods = ['PUT'])
 def editShortenLinks(slug):
     res = edit_url(request, slug)
+    if not __check_content_type(request.content_type):
+        return Response(status=400)
     return res
 
 if __name__ == '__main__':
