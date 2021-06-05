@@ -4,3 +4,4 @@ pymongo
 mongoengine
 python-dotenv
 gunicorn
+flask-cors
