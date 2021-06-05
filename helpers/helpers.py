@@ -5,7 +5,8 @@ def generateSlug(slugLen=8):
     return slug
 
 
-def check_content_type(reqContent):
-    if(reqContent and reqContent.startswith('application/json')):
+def check_content_type(req):
+    print("CONTENT:\n\n\n", req)
+    if(req and req.startswith('application/json')):
         return True
     return False

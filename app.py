@@ -4,6 +4,7 @@ from controllers.UrlController import *
 import boot.DBConnection
 from flask_cors import CORS, cross_origin
 from middlewares.ContentMiddleware import ContentMiddleware
+from helpers.helpers import *
 
 app = Flask(__name__)
 CORS(app)
@@ -11,16 +12,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # middleware
 # app.wsgi_app = ContentMiddleware(app.wsgi_app)
-def __check_content_type(reqContent):
-    if(reqContent and reqContent.startswith('application/json')):
-        return True
-    return False
 
 # Return all shortend links with slug
-@app.route('/shortlinks',methods = ['GET'])
+@app.route('/shortlinks', methods = ['GET'])
 @cross_origin()
 def getShortendLinks():
-    if not __check_content_type(request.content_type):
+    if not check_content_type(request.content_type):
         return Response(status=400)
     return get_urls(request)
 
@@ -28,7 +25,7 @@ def getShortendLinks():
 @app.route('/shortlinks', methods = ['POST'])
 @cross_origin()
 def shortenLink():
-    if not __check_content_type(request.content_type):
+    if not check_content_type(request.content_type):
         return Response(status=400)
     return create_short_url(request)
 
@@ -37,7 +34,7 @@ def shortenLink():
 @app.route('/shortlinks/<slug>',methods = ['PUT'])
 def editShortenLinks(slug):
     res = edit_url(request, slug)
-    if not __check_content_type(request.content_type):
+    if not check_content_type(request.content_type):
         return Response(status=400)
     return res
 
